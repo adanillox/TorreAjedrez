@@ -12,6 +12,22 @@ public class Posicion {
 	
 private int fila;
 private char columna;
+//Declaramos el constructor con parametros
+public Posicion(int fila,char columna) {
+	setFila(fila);
+	setColumna(columna);
+}
+
+//Declaramos la copia del constructor para controlar la excepción
+public Posicion(Posicion posicion) {
+	if(posicion== null) {
+		throw new NullPointerException("ERROR: No es posible copiar una posicion nula.");
+	}
+	else {
+		this.fila=posicion.getFila();
+		this.columna=posicion.getColumna();
+	}
+}
 //Declaramos los metodos
 public int getFila() {
 	return this.fila;
@@ -22,7 +38,7 @@ private void setFila(int fila) {
 		this.fila = fila;
 	} else {
 		
-		throw new IllegalArgumentException("ERROR: Fila no válida, tiene que ser entre .");
+		throw new IllegalArgumentException("ERROR: Fila no valida.");
 
 	}
 }
@@ -37,7 +53,7 @@ private void setColumna(char columna) {
 		this.columna = columna;
 	} else {
 		
-		throw new IllegalArgumentException("ERROR: Columna no válida,tiene que ser entre a y h");
+		throw new IllegalArgumentException("ERROR: Columna no valida.");
 
 	}
 }
