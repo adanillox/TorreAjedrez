@@ -3,6 +3,8 @@
  */
 package org.iesalandalus.programacion.torreajedrez;
 
+import java.util.Objects;
+
 import javax.naming.OperationNotSupportedException;
 
 /**
@@ -22,6 +24,9 @@ public Torre() {
 }
 
 public Torre(Color color) {
+	if(color==null) {
+		throw new NullPointerException("ERROR: No se puede asignar un color nulo.");
+	}
 	if (color==Color.BLANCO) {
 		this.posicion= new Posicion(1,'h');
 	}
@@ -29,9 +34,7 @@ public Torre(Color color) {
 		
 		this.posicion= new Posicion(8,'h');
 	}
-	else {
-		throw new IllegalArgumentException("ERROR: Color no valido.");
-	}
+	this.color=color;
 }
 
 public Torre(Color color, char columna) {
@@ -52,7 +55,7 @@ public Torre(Color color, char columna) {
 		}
 	}
 		else {
-				throw new IllegalArgumentException("ERROR: Columna no válida.");
+				throw new IllegalArgumentException("ERROR: Columna no valida.");
 				}
 	
 }
@@ -88,7 +91,7 @@ private void setColor(Color color) {
 public void mover(Direccion direccion,int pasos) throws OperationNotSupportedException {
 	if(direccion== null) {
 		
-		throw new	NullPointerException("ERROR: La dirección no puede ser nula.");
+		throw new	NullPointerException("ERROR: La direccion no puede ser nula.");
 			
 		}
 	if(pasos>=1) {
@@ -132,12 +135,12 @@ public void mover(Direccion direccion,int pasos) throws OperationNotSupportedExc
 			
 		}
 		catch(IllegalArgumentException  e){
-			throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+			throw new OperationNotSupportedException("ERROR: Movimiento no valido (se sale del tablero).");
 		}
 		
 	}
 	else {
-		throw new IllegalArgumentException("ERROR: El número de pasos debe ser positivo.");
+		throw new IllegalArgumentException("ERROR: El numero de pasos debe ser positivo.");
 	}
 	
 
@@ -147,7 +150,7 @@ public void mover(Direccion direccion,int pasos) throws OperationNotSupportedExc
 
 public void enrocar(Direccion direccion) throws OperationNotSupportedException {
 	if (direccion == null) {
-		throw new NullPointerException("ERROR: La dirección no puede ser nula.");
+		throw new NullPointerException("ERROR: La direccion no puede ser nula.");
 	}
 
 	switch (direccion) {
@@ -159,13 +162,13 @@ public void enrocar(Direccion direccion) throws OperationNotSupportedException {
 				setPosicion(new Posicion(posicion.getFila(), 'f'));
 			} else {
 			
-				throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
+				throw new OperationNotSupportedException("ERROR: Movimiento de enroque no valido.");
 			}
 		} else {
 			if ((posicion.getFila() == 1 && posicion.getColumna() == 'h')) {
 				setPosicion(new Posicion(posicion.getFila(), 'f'));
 			} else {
-				throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
+				throw new OperationNotSupportedException("ERROR: Movimiento de enroque no valido.");
 			}
 		}
 
@@ -178,13 +181,13 @@ public void enrocar(Direccion direccion) throws OperationNotSupportedException {
 			if (posicion.getFila() == 8 && posicion.getColumna() == 'a') {
 				setPosicion(new Posicion(posicion.getFila(), 'd'));
 			} else {
-				throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
+				throw new OperationNotSupportedException("ERROR: Movimiento de enroque no valido.");
 			}
 		} else {
 			if (posicion.getFila() == 1 && posicion.getColumna() == 'a') {
 				setPosicion(new Posicion(posicion.getFila(), 'd'));
 			} else {
-				throw new OperationNotSupportedException("ERROR: Movimiento de enroque no válido.");
+				throw new OperationNotSupportedException("ERROR: Movimiento de enroque no valido.");
 			}
 		}
 
@@ -192,6 +195,28 @@ public void enrocar(Direccion direccion) throws OperationNotSupportedException {
 	default:
 
 	}
+}
+
+@Override
+public int hashCode() {
+	return Objects.hash(color, posicion);
+}
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Torre other = (Torre) obj;
+	return color == other.color && Objects.equals(posicion, other.posicion);
+}
+
+@Override
+public String toString() {
+	return "fila=" + posicion.getFila() +", columna="+ posicion.getColumna() +", color=" + color;
 }
 
 
