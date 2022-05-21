@@ -77,4 +77,9 @@ public boolean equals(Object obj) {
 	return columna == other.columna && fila == other.fila;
 }
 
+@Override
+public String toString() {
+	return "fila=" + fila + ", columna=" + columna;
+}
+
 }
