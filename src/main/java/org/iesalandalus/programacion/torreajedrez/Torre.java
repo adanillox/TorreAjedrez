@@ -3,6 +3,8 @@
  */
 package org.iesalandalus.programacion.torreajedrez;
 
+import javax.naming.OperationNotSupportedException;
+
 /**
  * @author Adan
  *
@@ -80,6 +82,66 @@ private void setColor(Color color) {
 	else {
 		this.color = color;
 	}
+	
+}
+
+public void mover(Direccion direccion,int pasos) throws OperationNotSupportedException {
+	if(direccion== null) {
+		
+		throw new	NullPointerException("ERROR: La dirección no puede ser nula.");
+			
+		}
+	if(pasos>=1) {
+		
+		try {
+			
+			switch(direccion) {
+			
+			
+			case IZQUIERDA:
+				if (color == Color.NEGRO) {
+					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() + pasos)));
+				} else {
+					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() - pasos)));
+					
+				}
+				break;
+			case DERECHA:
+				if (color == Color.NEGRO) {
+					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() - pasos)));
+				} else {
+					setPosicion(new Posicion(posicion.getFila(), (char) (posicion.getColumna() + pasos)));
+					
+				}
+				break;
+			case ARRIBA:
+				if (color == Color.BLANCO) {
+					setPosicion(new Posicion(posicion.getFila() + pasos, posicion.getColumna()));
+				} else {
+					setPosicion(new Posicion(posicion.getFila() - pasos, posicion.getColumna()));
+				}
+				break;
+			case ABAJO:
+				if (color == Color.BLANCO) {
+					setPosicion(new Posicion(posicion.getFila() - pasos, posicion.getColumna()));
+				} else {
+					setPosicion(new Posicion(posicion.getFila() + pasos, posicion.getColumna()));
+				}
+				break;
+			}
+			
+		}
+		catch(IllegalArgumentException  e){
+			throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+		}
+		
+	}
+	else {
+		throw new IllegalArgumentException("ERROR: El número de pasos debe ser positivo.");
+	}
+	
+
+	
 	
 }
 
