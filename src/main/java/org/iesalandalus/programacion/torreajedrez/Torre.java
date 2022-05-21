@@ -32,6 +32,28 @@ public Torre(Color color) {
 	}
 }
 
+public Torre(Color color, char columna) {
+	if (color == null) {
+		throw new NullPointerException("ERROR: No se puede asignar un color nulo.");
+	}
+	else {
+		setColor(color);
+	}
+
+	if (columna == 'a' || columna == 'h') {
+		if (color == Color.BLANCO) {
+			posicion = new Posicion(1, columna);
+			
+			
+		} else if (color == Color.NEGRO) {
+			posicion = new Posicion(8, columna);
+		}
+	}
+		else {
+				throw new IllegalArgumentException("ERROR: Columna no válida.");
+				}
+	
+}
 
 //Metodos
 public Posicion getPosicion() {
