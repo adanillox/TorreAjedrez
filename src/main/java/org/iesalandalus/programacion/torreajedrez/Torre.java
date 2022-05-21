@@ -19,6 +19,18 @@ public Torre() {
 	this.posicion=new Posicion(8,'h');
 }
 
+public Torre(Color color) {
+	if (color==Color.BLANCO) {
+		this.posicion= new Posicion(1,'h');
+	}
+	else if(color==Color.NEGRO) {
+		
+		this.posicion= new Posicion(8,'h');
+	}
+	else {
+		throw new IllegalArgumentException("ERROR: Color no valido.");
+	}
+}
 
 
 //Metodos
