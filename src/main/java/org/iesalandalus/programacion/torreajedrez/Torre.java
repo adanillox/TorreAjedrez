@@ -8,11 +8,20 @@ package org.iesalandalus.programacion.torreajedrez;
  *
  */
 public class Torre {
-	
+// Atributos de clases	
 private Posicion posicion;
 private Color color;
 
+//Constructores
 
+public Torre() {
+	this.color=color.NEGRO;
+	this.posicion=new Posicion(8,'h');
+}
+
+
+
+//Metodos
 public Posicion getPosicion() {
 	return this.posicion;
 }
