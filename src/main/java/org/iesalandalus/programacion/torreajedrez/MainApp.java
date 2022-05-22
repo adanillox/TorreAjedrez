@@ -6,9 +6,21 @@ import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class MainApp {
 	private static Torre torre;
-	public static void main(String[] args) {
-		System.out.println("kk");
+	public static void main(String[] args) throws OperationNotSupportedException {
+		int opcion;
+		do {
+			mostrarMenu();
+			opcion = elegirOpcion();
+			ejecutarOpcion(opcion);
+			if (opcion != 5) {
+				mostrarTorre();
+			}
+		} while (opcion != 5);
+
+		System.out.println("Bye");
 	}
+
+	
 	
 	
 	
@@ -80,6 +92,7 @@ public class MainApp {
 		
 		int opcion;
 		do {
+			mostrarMenuDirecciones();
 			System.out.print(" Elija una opcion: ");;
 			opcion = Entrada.entero();
 
@@ -113,7 +126,7 @@ public class MainApp {
 	
 	private static void crearTorreDefecto() {
 		torre = new Torre();
-		System.out.println("Se creo la torre por defecto en la posicion 8h de color negro.");
+		System.out.println("Se creo la torre por defecto.");
 	}
 	
 	
